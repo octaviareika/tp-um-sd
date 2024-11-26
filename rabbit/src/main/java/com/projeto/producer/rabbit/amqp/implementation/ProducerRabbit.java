@@ -15,11 +15,11 @@ public class ProducerRabbit implements AmqpProducer<Message> {
     private RabbitTemplate rabbitTemplate;
 
     @Value("${spring.rabbitmq.request.routing-key.producer}")
-    private String queue;
+    private String queue; // define a fila que a mensagem vai ser enviada
 
 
     @Value("${spring.rabbitmq.request.exchange.producer}")
-    private String exchange;
+    private String exchange; // define a exchange que a mensagem vai ser enviada
 
 
     @Override
@@ -27,7 +27,7 @@ public class ProducerRabbit implements AmqpProducer<Message> {
 
         try {
 
-            rabbitTemplate.convertAndSend(exchange, queue, message);
+            rabbitTemplate.convertAndSend(exchange, queue, message); // produz a mensagem que vai ser enviada para a fila e exchange definidas
 
         } catch (Exception e) {
             throw new AmqpRejectAndDontRequeueException(e);

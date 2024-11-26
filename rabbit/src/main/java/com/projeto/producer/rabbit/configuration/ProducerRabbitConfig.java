@@ -44,16 +44,17 @@ public class ProducerRabbitConfig {
 
         args.put("x-dead-letter-exchange", exchange); // serve para definir a exchange que a mensagem vai ser enviada caso ela não seja processada
         args.put("x-dead-letter-routing-key", deadLetter); // serve para definir a routing key que a mensagem vai ser enviada caso ela não seja processada
-        return new Queue(queue, true, false, false, args);
+        return new Queue(queue, true, false, false, args); // determina qe a fila é durável, não exclusiva e não autodeletável
     }
 
-    @Bean
+    @Bean 
     public Binding bindingQueue(){
-        return BindingBuilder.bind(queue()).to(exchange()).with(queue);
+        return BindingBuilder.bind(queue()).to(exchange()).with(queue); // Cria uma relação entre a fila e a exchange.
+        
     }
 
     @Bean
     public Binding bindingDeadLetter(){
-        return BindingBuilder.bind(deadLetter()).to(exchange()).with(deadLetter);
+        return BindingBuilder.bind(deadLetter()).to(exchange()).with(deadLetter); // Cria uma relação entre a fila deadLetter e a exchange.
     }
 }

@@ -19,7 +19,7 @@ public class AmqpAPI {
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping("/send")
     public void sendToConsumer(@RequestBody Message message) {
-        // enviar a mensagem para o consumidor
+        // enviar a mensagem para o consumidor pra ele consumir
         amqpService.sendToConsumer(message);
     }
 }
